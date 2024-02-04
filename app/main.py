@@ -93,14 +93,11 @@ def update_post(id: int, post: schemas.Postcreate, db: Session = Depends(get_db)
     if existing_post is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"The post with the id {id} was not found")
-
     # Update the post
     existing_post.title = post.title
     existing_post.content = post.content
     existing_post.published = post.published
-
     db.commit()
-
     return existing_post.model_dump()
 
 
